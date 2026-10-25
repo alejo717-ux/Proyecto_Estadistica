@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		try {
 			// * Enviar petición POST a la API de FastAPI (SQLite)
-			const response = await fetch("http://192.168.1.217:8000/api/respuestas", {
+			const response = await fetch("https://proyecto-estadistica-mabk.onrender.com/api/respuestas", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
