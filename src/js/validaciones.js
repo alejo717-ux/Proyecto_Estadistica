@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	if (!form) return;
 
-	// Traducir y personalizar los mensajes de error nativos del navegador al español
+	// * Traducir y personalizar los mensajes de error nativos del navegador al español
 	const elements = form.querySelectorAll("input, select, textarea");
 	elements.forEach((element) => {
 		element.addEventListener("invalid", () => {
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 
-		// Limpiar el mensaje de error personalizado en cuanto el usuario interactúe
+		// * Limpiar el mensaje de error personalizado en cuanto el usuario interactúe
 		element.addEventListener("input", () => {
 			element.setCustomValidity("");
 		});
@@ -37,14 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	});
 
-	// Control de envío del formulario
-	form.addEventListener("submit", (e) => {
+	// * Control de envío del formulario hacia la API
+	form.addEventListener("submit", async (e) => {
 		e.preventDefault();
 
 		const gpaInput = document.getElementById("gpa");
 		const gpaValue = parseFloat(gpaInput.value);
 
-		// Validación estricta del GPA (Índice académico UTP: 0.00 a 3.00)
+		// ! Validación estricta del GPA (Índice académico UTP: 0.00 a 3.00)
 		if (Number.isNaN(gpaValue) || gpaValue < 0 || gpaValue > 3.0) {
 			alert(
 				"Error de validación: El índice académico (GPA) debe ser un valor numérico válido entre 0 y 3.00.",
@@ -53,24 +53,52 @@ document.addEventListener("DOMContentLoaded", () => {
 			return;
 		}
 
-		// Recopilar datos para simulación de análisis estadístico
+		// ? Recopilar datos para simulación de análisis estadístico
 		const formData = new FormData(form);
-		const respuestaEstudiante = {};
+		const data = {};
 
-		for (let [key, value] of formData.entries()) {
-			respuestaEstudiante[key] = value;
+		formData.forEach((value, key) => {
+			if (
+				[
+					"gpa",
+					"cant_ides",
+					"frecuenciaGit",
+					"numRepositorio",
+					"escalaOptima",
+					"influenciaCali",
+				].includes(key)
+			) {
+				data[key] = Number(value);
+			} else {
+				data[key] = value;
+			}
+		});
+
+		try {
+			// * Enviar petición POST a la API de FastAPI (SQLite)
+			const response = await fetch("http://192.168.1.217:8000/api/respuestas", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(data),
+			});
+
+			if (!response.ok) {
+				throw new Error("Error al conectar con el servidor backend.");
+			}
+
+			const resultado = await response.json();
+			console.log("✅ Datos guardados en la base de datos:", resultado);
+
+			alert("✨ ¡Respuesta registrada y almacenada en SQLite con éxito!");
+			form.reset();
+		} catch (error) {
+			// ! Capturar fallos de comunicación con el servidor Uvicorn
+			console.error("❌ Error de conexión:", error);
+			alert(
+				"⚠️ No se pudo conectar con el servidor backend de Python. Asegúrate de ejecutar uvicorn.",
+			);
 		}
-
-		console.log(
-			"📊 Datos de encuesta capturados exitosamente:",
-			respuestaEstudiante,
-		);
-
-		// Alerta de éxito integrada con la estética
-		alert(
-			"✨ ¡Respuesta registrada con éxito! Los datos han sido integrados al buffer estadístico.",
-		);
-
-		form.reset();
 	});
 });
