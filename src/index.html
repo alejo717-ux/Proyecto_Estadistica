@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="viewport" content="Instrumento de recolección de datos estadísticos para estudiantes de la FISC UTP">
+    <meta name="description" content="Instrumento de recolección de datos estadísticos para estudiantes de la FISC UTP">
     <title>Encuesta Estadística - FISC UTP</title>
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
+    <!-- Canvas animado para el fondo de 8-bits con vida -->
+    <canvas id="bgCanvas"></canvas>
+    
     <header> 
             <h1>Análisis Estadístico y Predictivo</h1>
-            <p>Impacto de los Entornos de Desarrollo, Terminales y Git en el rendimientos Académico de la FISC (UTP)</p>
+            <p>Impacto de los Entornos de Desarrollo, Terminales y Git en el rendimiento Académico de la FISC (UTP)</p>
     </header>
 
     <main>
@@ -46,7 +49,7 @@
              <fieldset>
                 <legend>Sección II: Uso de Entornos de Desarrollo Integrados (IDEs)</legend>
 
-                <label for="idePrincipal">4. Cuál es el entorno de desarrollo integrados (IDE) o editor que utilizaras de forma principal? </label>
+                <label for="idePrincipal">4. ¿Cuál es el entorno de desarrollo integrado (IDE) o editor que utilizas de forma principal? </label>
                 <select id="idePrincipal" name="idePrincipal" required>
                     <option value="">Seleccione una opción</option>
                     <option value="VS_Code">VS Code</option>
@@ -56,7 +59,7 @@
                     <option value="Otro">Otro</option>
                 </select>
 
-                <label for="cant_ides">5. Cuántos IDEs o editores distintos utilizas simultáneamente?</label>
+                <label for="cant_ides">5. ¿Cuántos IDEs o editores distintos utilizas simultáneamente?</label>
                 <input type="number" id="cant_ides" name="cant_ides" min="1" max="5" value="1" required>
 
                 <label for="horas_prog">6. ¿Cuántas horas promedio al día dedicas a programar en tu IDE principal?</label>
@@ -68,7 +71,7 @@
                     <option value="mas_5">Más de 5 horas</option>
                 </select>
 
-                <label for="lenguaje">8. Cuál es el lenguaje de programación que utilizas con mayor frecuencia</label>
+                <label for="lenguaje">8. ¿Cuál es el lenguaje de programación que utilizas con mayor frecuencia?</label>
                 <select id="lenguaje" name="lenguaje" required>
                     <option value="">Seleccione una opción</option>
                     <option value="C">C</option>
@@ -76,7 +79,7 @@
                     <option value="Csharp">C#</option>
                     <option value="Java">Java</option>
                     <option value="Python">Python</option>
-                    <option value="JavaScript">Java</option>
+                    <option value="JavaScript">JavaScript</option>
                     <option value="SQL">SQL</option>
                 </select>
             </fieldset>
@@ -84,6 +87,7 @@
             <!-- Sección III: TERMINAL Y GIT -->
              <fieldset>
                 <legend>Sección III: Dominio y Uso de Terminales de Comandos y Git/GitHub </legend>
+
 
                 <label for="usaTerminal-si">9. ¿Utilizas la terminal/consola de comandos para la ejecución de proyecto?</label>
                 <div class="radio-group">
@@ -94,9 +98,9 @@
                 <label for="nivelTerminal">10. ¿Cómo calificas tu nivel de dominio en líneas de comandos? </label>
                 <select id="nivelTerminal" name="nivelTerminal" required>
                     <option value="">Seleccione una opción</option>
-                    <option value="Principiante">Seleccione una opción</option>
-                    <option value="Intermedio">Seleccione una opción</option>
-                    <option value="Avanzado">Seleccione una opción</option>
+                    <option value="Principiante">Principiante</option>
+                    <option value="Intermedio">Intermedio</option>
+                    <option value="Avanzado">Avanzado</option>
                 </select>
 
                 <label for="frecuenciaGit">11. ¿Con qué frecuencia utilizas Git y GitHub para control de versiones?</label>
@@ -109,10 +113,9 @@
                     <label><input type="radio" name="scriptBash" value="noSabe" required> No sé cómo realizarlos</label>
                 </div>
 
-                <label for="numRepositorio">13. ¿aproximadamente cuántos repositorios mantienes activos? en GitHub</label>
+                <label for="numRepositorio">13. ¿Aproximadamente cuántos repositorios mantienes activos en GitHub?</label>
                 <input type="number" id="numRepositorio" name="numRepositorio" min="0" max="50" value="0" required>
              </fieldset>
-
 
              <!-- SECCIÓN IV: IMPACTO ACADÉMICO -->
             <fieldset>
@@ -131,7 +134,7 @@
                 </select>
 
                 <label for="perdidaCodigo">16. ¿Has experimentado pérdida de código por no utilizar Git/GitHub?</label>
-                <select id="perdidaCodigo" name="perdidaCódigo" required>
+                <select id="perdidaCodigo" name="perdidaCodigo" required>
                     <option value="">Seleccione una opción</option>
                     <option value="Frecuentemente">Frecuentemente</option>
                     <option value="Ocasionalmente">Ocasionalmente</option>
@@ -151,10 +154,19 @@
                     <option value="mas_5">Más de 5 horas</option>
                 </select>
             </fieldset>
-            
+
+            <!-- Botones de Acción Agregados -->
+            <div class="botones-container">
+                <button type="submit">Enviar Respuesta</button>
+                <button type="reset">Limpiar Formulario</button>
+            </div>
         </form>
     </main>
-    <h1>Hola mundo</h1>
+
+    <footer>
+        <p>&copy; 2026 - Universidad Tecnológica de Panamá (UTP) | Facultad de Ingeniería de Sistemas Computacionales</p>
+    </footer>
+
     <script src="js/scripts.js" defer></script>
 </body>
 </html>
