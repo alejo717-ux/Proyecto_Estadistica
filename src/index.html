@@ -3,11 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Web</title>
+        <meta name="viewport" content="Instrumento de recolección de datos estadísticos para estudiantes de la FISC UTP">
+    <title>Encuesta Estadística - FISC UTP</title>
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
+    <header> 
+            <h1>Análisis Estadístico y Predictivo</h1>
+            <p>Impacto de los Entornos de Desarrollo, Terminales y Git en el rendimientos Académico de la FISC (UTP)</p>
+    </header>
+
+    <main>
+        <form id="EncuestaForm" action="#" method="post">
+            <!-- Sección I: DATOS DEMOGRÁFICOS Y ACADÉMICOS -->
+             <fieldset>
+                <legend>Sección I: Datos Demográficos y Académicos</legend>
+
+                <label for="carrera">1. ¿Qué carrera cursas actualmente dentro de la FISC?</label>
+                <select id="carrera" name="carrera" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="desarrolloSoftware">Lic. en Desarrollo y Gestión de Software</option>
+                    <option value="ingenieríaSoftware">Lic. en Ingeniería de Software</option>
+                    <option value="ciberseguridad">Lic. en Ciberseguridad</option>
+                    <option value="redesInformáticas">Lic. en Redes Informáticas</option>
+                    <option value="Otra">Otra</option>
+                </select>
+
+                <label for="anio">2. ¿En qué año de la carrera te encuentras?</label>
+                <select id="anio" name="anio" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="1">1° Año </option>
+                    <option value="2">2° Año</option>
+                    <option value="3">3° Año</option>
+                    <option value="4">4° Año o superior</option>
+                </select>
+
+                <label for="gpa">3. ¿Cuál es tu índice académico acumulado aproximado (promedio general)?</label>
+                <input type="number" id="gpa" name="gpa" step="0.01" min="1.00" max="3.00" placeholder="Ej. 2.68" required>
+             </fieldset>
+
+            <!-- Sección II: USO DE IDEs -->
+             <fieldset>
+                <legend>Sección II: Uso de Entornos de Desarrollo Integrados (IDEs)</legend>
+
+                <label for="idePrincipal">4. Cuál es el entorno de desarrollo integrados (IDE) o editor que utilizaras de forma principal? </label>
+                <select id="idePrincipal" name="idePrincipal" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="VS_Code">VS Code</option>
+                    <option value="Visual_Studio">Visual Studio Community</option>
+                    <option value="IntelliJ">IntelliJ IDEA</option>
+                    <option value="PyCharm">PyCharm</option>
+                    <option value="Otro">Otro</option>
+                </select>
+
+                <label for="cant_ides">5. Cuántos IDEs o editores distintos utilizas simultáneamente?</label>
+                <input type="number" id="cant_ides" name="cant_ides" min="1" max="5" value="1" required>
+
+                <label for="horas_prog">6. ¿Cuántas horas promedio al día dedicas a programar en tu IDE principal?</label>
+                <select id="horas_prog" name="horas_prog" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="menos_1">Menos de 1 hora</option>
+                    <option value="1_3">1 a 3 horas</option>
+                    <option value="3_5">3 a 5 horas</option>
+                    <option value="mas_5">Más de 5 horas</option>
+                </select>
+
+                <label for="lenguaje">8. Cuál es el lenguaje de programación que utilizas con mayor frecuencia</label>
+                <select id="lenguaje" name="lenguaje" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="C">C</option>
+                    <option value="Cplus">C++</option>
+                    <option value="Csharp">C#</option>
+                    <option value="Java">Java</option>
+                    <option value="Python">Python</option>
+                    <option value="JavaScript">Java</option>
+                    <option value="SQL">SQL</option>
+                </select>
+            </fieldset>
+
+            <!-- Sección III: TERMINAL Y GIT -->
+             <fieldset>
+                <legend>Sección III: Dominio y Uso de Terminales de Comandos y Git/GitHub </legend>
+
+                <label for="usaTerminal-si">9. ¿Utilizas la terminal/consola de comandos para la ejecución de proyecto?</label>
+                <div class="radio-group">
+                    <label><input type="radio" id="usaTerminal-si" name="usaTerminal" value="Si" required> Sí</label>
+                    <label><input type="radio" name="usaTerminal" value="No"> No</label>
+                </div>
+
+                <label for="nivelTerminal">10. ¿Cómo calificas tu nivel de dominio en líneas de comandos? </label>
+                <select id="nivelTerminal" name="nivelTerminal" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="Principiante">Seleccione una opción</option>
+                    <option value="Intermedio">Seleccione una opción</option>
+                    <option value="Avanzado">Seleccione una opción</option>
+                </select>
+
+                <label for="frecuenciaGit">11. ¿Con qué frecuencia utilizas Git y GitHub para control de versiones?</label>
+                <input type="number" id="frecuenciaGit" name="frecuenciaGit" min="1" max="5" value="3" required>
+                
+                <label for="scriptBash-si">12. ¿Sueles automatizar tareas repetitivas mediante scripts en Bash?</label>
+                <div class="radio-group">
+                    <label><input type="radio" id="scriptBash-si" name="scriptBash" value="si" required> Sí</label>
+                    <label><input type="radio" name="scriptBash" value="no" required> No</label>
+                    <label><input type="radio" name="scriptBash" value="noSabe" required> No sé cómo realizarlos</label>
+                </div>
+
+                <label for="numRepositorio">13. ¿aproximadamente cuántos repositorios mantienes activos? en GitHub</label>
+                <input type="number" id="numRepositorio" name="numRepositorio" min="0" max="50" value="0" required>
+             </fieldset>
+
+
+             <!-- SECCIÓN IV: IMPACTO ACADÉMICO -->
+            <fieldset>
+                <legend>Sección IV: IMPACTO EN LA EFICIENCIA Y RENDIMIENTO ACADÉMICO</legend>
+
+                <label for="escalaOptima">14. ¿Cuánto consideras que dominar terminales e IDEs optimiza tu tiempo? (Escala 1 al 5)</label>
+                <input type="number" id="escalaOptima" name="escalaOptima" min="1" max="5" value="4" required>
+
+                <label for="porcErrores">15. ¿Qué porcentaje de errores de compilación logras resolver gracias a las herramientas?</label>
+                <select id="porcErrores" name="porcErrores" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="25">Menos del 25%</option>
+                    <option value="50">25% - 50%</option>
+                    <option value="75">50% - 75%</option>
+                    <option value="100">Más del 75%</option>
+                </select>
+
+                <label for="perdidaCodigo">16. ¿Has experimentado pérdida de código por no utilizar Git/GitHub?</label>
+                <select id="perdidaCodigo" name="perdidaCódigo" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="Frecuentemente">Frecuentemente</option>
+                    <option value="Ocasionalmente">Ocasionalmente</option>
+                    <option value="Nunca">Nunca</option>
+                    <option value="Siempre_Uso_Git">Siempre uso Git</option>
+                </select>
+
+                <label for="influenciaCali">17. ¿Consideras que la fluidez en terminal e IDEs ha influido positivamente en tus notas? (Escala 1 al 5)</label>
+                <input type="number" id="influenciaCali" name="influenciaCali" min="1" max="5" value="4" required>
+
+                <label for="horasAhorradas">18. ¿Cuántas horas semanales calculas que ahorras al utilizar automatizaciones?</label>
+                <select id="horasAhorradas" name="horasAhorradas" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="0">0 horas</option>
+                    <option value="1_2">1 a 2 horas</option>
+                    <option value="3_5">3 a 5 horas</option>
+                    <option value="mas_5">Más de 5 horas</option>
+                </select>
+            </fieldset>
+            
+        </form>
+    </main>
     <h1>Hola mundo</h1>
-    <script src="js/app.js" defer></script>
+    <script src="js/scripts.js" defer></script>
 </body>
 </html>
