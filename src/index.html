@@ -10,7 +10,7 @@
 <body>
     <!-- Canvas animado para el fondo de 8-bits con vida -->
     <canvas id="bgCanvas"></canvas>
-    
+
     <header> 
             <h1>Análisis Estadístico y Predictivo</h1>
             <p>Impacto de los Entornos de Desarrollo, Terminales y Git en el rendimiento Académico de la FISC (UTP)</p>
@@ -42,7 +42,7 @@
                 </select>
 
                 <label for="gpa">3. ¿Cuál es tu índice académico acumulado aproximado (promedio general)?</label>
-                <input type="number" id="gpa" name="gpa" step="0.01" min="1.00" max="3.00" placeholder="Ej. 2.68" required>
+                <input type="number" id="gpa" name="gpa" step="0.01" min="0.00" max="3.00" placeholder="Ej. 2.68" required>
              </fieldset>
 
             <!-- Sección II: USO DE IDEs -->
@@ -106,7 +106,7 @@
                 <label for="frecuenciaGit">11. ¿Con qué frecuencia utilizas Git y GitHub para control de versiones?</label>
                 <input type="number" id="frecuenciaGit" name="frecuenciaGit" min="1" max="5" value="3" required>
                 
-                <label for="scriptBash-si">12. ¿Sueles automatizar tareas repetitivas mediante scripts en Bash?</label>
+                <label for="scriptBash-si">12. ¿Sueles automatizar tareas repetitivas mediante scripts (terminal)?</label>
                 <div class="radio-group">
                     <label><input type="radio" id="scriptBash-si" name="scriptBash" value="si" required> Sí</label>
                     <label><input type="radio" name="scriptBash" value="no" required> No</label>
@@ -168,5 +168,6 @@
     </footer>
 
     <script src="js/scripts.js" defer></script>
+    <script src="js/validaciones.js" defer></script>
 </body>
 </html>
