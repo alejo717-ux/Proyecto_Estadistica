@@ -1,7 +1,8 @@
-// src/js/validaciones.js — Validación interactiva, mensajes en español y captura de datos
+// src/js/validaciones.js — Validación interactiva, mensajes en español y control de pantalla de carga
 
 document.addEventListener("DOMContentLoaded", () => {
 	const form = document.getElementById("EncuestaForm");
+	const loadingOverlay = document.getElementById("loadingOverlay");
 
 	if (!form) return;
 
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	});
 
-	// * Control de envío del formulario hacia la API
+	// * Control de envío del formulario hacia la API en la nube
 	form.addEventListener("submit", async (e) => {
 		e.preventDefault();
 
@@ -53,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			return;
 		}
 
-		// ? Recopilar datos para simulación de análisis estadístico
+		// ? Recopilar datos del formulario
 		const formData = new FormData(form);
 		const data = {};
 
@@ -74,15 +75,23 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 
+		// 🚀 Mostrar la pantalla de carga para evitar clics múltiples y dar feedback al usuario
+		if (loadingOverlay) {
+			loadingOverlay.style.display = "flex";
+		}
+
 		try {
-			// * Enviar petición POST a la API de FastAPI (SQLite)
-			const response = await fetch("https://proyecto-estadistica-mabk.onrender.com/api/respuestas", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
+			// * Enviar petición POST a la API de FastAPI en Render
+			const response = await fetch(
+				"https://proyecto-estadistica-mabk.onrender.com/api/respuestas",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(data),
 				},
-				body: JSON.stringify(data),
-			});
+			);
 
 			if (!response.ok) {
 				throw new Error("Error al conectar con el servidor backend.");
@@ -94,11 +103,16 @@ document.addEventListener("DOMContentLoaded", () => {
 			alert("✨ ¡Respuesta registrada y almacenada en SQLite con éxito!");
 			form.reset();
 		} catch (error) {
-			// ! Capturar fallos de comunicación con el servidor Uvicorn
+			// ! Capturar fallos de comunicación con el servidor en Render
 			console.error("❌ Error de conexión:", error);
 			alert(
-				"⚠️ No se pudo conectar con el servidor backend de Python. Asegúrate de ejecutar uvicorn.",
+				"⚠️ No se pudo conectar con el servidor backend en la nube. Inténtalo de nuevo en unos segundos.",
 			);
+		} finally {
+			// 🛑 Ocultar la pantalla de carga sin importar si hubo éxito o error
+			if (loadingOverlay) {
+				loadingOverlay.style.display = "none";
+			}
 		}
 	});
 });
